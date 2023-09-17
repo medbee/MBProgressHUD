@@ -70,6 +70,7 @@ typedef NS_ENUM(NSInteger, MBProgressHUDBackgroundStyle) {
 };
 
 typedef void (^MBProgressHUDCompletionBlock)(void);
+typedef void (^MBProgressHUDTappedBlock)(void);
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -182,6 +183,11 @@ NS_ASSUME_NONNULL_BEGIN
  * Called after the HUD is hidden.
  */
 @property (copy, nullable) MBProgressHUDCompletionBlock completionBlock;
+
+/**
+ * Called after tapping the HUD or backgroundView
+ */
+@property (copy, nullable) MBProgressHUDTappedBlock tappedBlock;
 
 /**
  * Grace period is the time (in seconds) that the invoked method may be run without

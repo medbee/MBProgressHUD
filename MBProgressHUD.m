@@ -100,6 +100,7 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
     [self setupViews];
     [self updateIndicators];
     [self registerForNotifications];
+    [self setupGestureRecognizer];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -506,6 +507,12 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
     }
 }
 
+- (void)setupGestureRecognizer {
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_hudTapped:)];
+    [self.backgroundView addGestureRecognizer:recognizer];
+    [self addGestureRecognizer:recognizer];
+}
+
 #pragma mark - Layout
 
 - (void)updateConstraints {
@@ -803,6 +810,15 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
         self.transform = CGAffineTransformMakeRotation(radians);
     }
 #endif
+}
+
+#pragma mark - Private
+
+- (void)_hudTapped:(UIGestureRecognizer *)recognizer
+{
+    if (self.tappedBlock != nil) {
+        self.tappedBlock();
+    }
 }
 
 @end
